@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>login</title>
+  <link href="base.css" rel="stylesheet">
+  <script src="jquery-3.2.1.js"></script>
+  <style>
+    form {
+      height: 250px;
+    }
+  </style>
+</head>
+<body>
+<%- message %>
+<form>
+  <div id="title">用户登录</div>
+  <label for="username"></label><input type="text"  id="username" name="username" placeholder="用户名"><br>
+  <label for="pwd"></label><input type="password"  id="pwd" name="pwd" placeholder="密码"><br>
+  <input type="button" onclick="login()" value="登录">
+  <button class="btn-small"><a href="register">注册</a></button>
+</form>
+</body>
+</body>
+<script>
+  function login() {
+    var name = $('#username').val(),
+      password = $('#pwd').val()
+    var data = {"loginname": name, "loginwd": password}
+
+    $.ajax({
+      url: '/login',
+      type: 'post',
+      data: data,
+      success: function (data, status) {
+        if (status == 'success') {
+          location.href = 'goods'
+          alert('登录成功')
+        }
+      },
+      error: function (data, status) {
+        if (status == 'error') {
+          location.href = 'login'
+          alert('登录失败')
+        }
+      }
+    })
+  }
+</script>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>register</title>
+  <link href="base.css" rel="stylesheet">
+  <script src="jquery-3.2.1.js"></script>
+  <script>
+    function register() {
+      var name = $('#username').val(),
+        pwd = $('#password').val(),
+        pwd2 = $('#spwd').val()
+      alert("name: " + name)
+      //通过serialize()方法进行序列化表单值，创建文本字符串
+      //var data = $('form').serialize()
+      var data = {"uname": name, upwd: pwd, upwd2: pwd2}
+
+      //jquery操作ajax
+      $.ajax({//通过register.js提交
+        url: '/register',
+        type: 'post',
+        data: data,
+        success: function (data, status) {
+          if (status == 'success') {
+            location.href = 'login'
+            alert('成功了')
+          } else {
+            alert('成功一半')
+          }
+        },
+        error: function (data, err) {
+          location.href = 'register'
+          alert('失败了')
+        }
+      })
+    }
+  </script>
+</head>
+<body>
+<%- message %>
+<form>
+  <div id="title">用户注册</div>
+  <label for="username"></label><input type="text" id="username" name="username" placeholder="用户名"><br>
+  <label for="password"></label><input type="password" id="password" name="password" placeholder="密码"><br>
+  <label for="spwd"></label><input type="password" id="spwd" name="spwd" placeholder="确认密码"><br>
+  <input type="button" onclick="register()" value="注册">
+  <button class="btn-small"><a href="login">登录</a></button>
+</form>
+</body>
+
+</html>
