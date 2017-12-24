@@ -4,53 +4,67 @@
   <meta charset="UTF-8">
   <title>goods</title>
   <script src="jquery-3.2.1.js"></script>
-  <link href="base.css" rel="stylesheet">
   <link href="bootstrap.css" rel="stylesheet">
   <script src="bootstrap.js"></script>
+  <link href="base.css" rel="stylesheet">
   <style>
     .content {
       position: relative;
-      margin:30px auto;
+      margin: 20px auto;
       text-align: left;
       width: 80%;
-      height: 700px;
-      border:2px solid black;
-      border-radius:15px;
+      min-height: 300px;
+      border: 2px solid black;
+      border-radius: 15px;
       background: linear-gradient(to bottom right, rgba(222, 22, 22, .9), rgba(22, 22, 222, .7)) no-repeat;
     }
 
     header {
-      height:60px;
-      border-radius:15px 15px 0 0;
+      height: 60px;
+      border-radius: 15px 15px 0 0;
       background: #ccc;
     }
 
-    .title{
-      margin-left:30px;
-      font-size:24px;
-      line-height:60px;
-      color:black;
+    .title {
+      margin-left: 30px;
+      font-size: 24px;
+      line-height: 60px;
+      color: black;
     }
 
     #addcom, #cart, #exit {
       position: absolute;
-      top:16px;
+      display: block;
+      top: 16px;
       padding: 5px;
     }
 
-    #exit{
-      right:20px;
+    #exit {
+      right: 20px;
     }
 
-    #cart{
-      right:80px;
+    #cart {
+      right: 80px;
     }
 
-    #addcom{
-      right:160px;
+    #addcom {
+      right: 160px;
     }
 
-    header
+    a {
+      display: block;
+      text-decoration: none;
+      color: white;
+    }
+
+    .spys {
+      display: inline-block;
+      margin:20px;
+      padding:10px;
+      text-align: center;
+      /*border:1px solid black;*/
+    }
+
   </style>
 
 </head>
@@ -58,10 +72,28 @@
 <div class="content">
   <header>
     <span class="title">商品展示页</span>
-    <button id="addcom" class="btn btn-success">添加商品</button>
-    <button id="cart" class="btn btn-success">购物车</button>
-    <button id="exit" class="btn btn-primary">退出</button>
+    <button id="addcom" class="btn btn-success"><a href="addgoods">添加商品</a></button>
+    <button id="cart" class="btn btn-success"><a href="cart">购物车</a></button>
+    <button id="exit" class="btn btn-primary"><a href="exit">退出</a></button>
   </header>
+  <div class="pan">
+    <ul>
+      <% for(var i in goods){if (!goods[i].name) continue %>
+      <li class="spys li">
+        <div>
+          <img width="80" height="100" src="/images/<%= goods[i].imgSrc %>">
+        </div>
+        <div style="text-align:center">
+          <a><%= goods[i].name %></a>
+          <strong style="color:black">￥<%= goods[i].price %></strong>
+        </div>
+        <div>
+          <a class="btn btn-success" style="width:90px;" href="addcart">加入购物车</a>
+        </div>
+      </li>
+      <% } %>
+    </ul>
+  </div>
 </div>
 
 

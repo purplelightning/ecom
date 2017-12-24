@@ -8,6 +8,11 @@ a{
     color:white;
 }
 
+ul,li{
+    padding:0;
+    margin:0;
+    list-style: none;
+}
 form {
     position: relative;
     margin: auto;

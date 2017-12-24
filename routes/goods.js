@@ -1,10 +1,11 @@
 module.exports = function (app) {
   app.get('/goods', function (req, res) {
     if (req.session.user) {
-      var commodity = global.dbHelper.getModel('commodity')
-      commodity.find({}, function (error, docs) {
+      req.session.error = ''
+      var goods = global.dbHelper.getModel('commodity')
+      goods.find({}, function (error, docs) {
         //将commodity变量传入home模板
-        res.render('goods', {commodity: docs})
+        res.render('goods', {goods: docs})
       })
     } else {
       req.session.error = '请先登录'
@@ -16,17 +17,23 @@ module.exports = function (app) {
     res.render('addgoods')
   })
   app.post('/addgoods', function (req, res) {
-    var commodity = global.dbHelper.getModel('commodity')
-    commodity.create({
-      name: req.body.name,
-      price: req.body.price,
-      imgSrc: req.body.imgSrc
-    }, function (error, doc) {
-      if (doc) {
-        res.send(200)
-      } else {
-        res.send(404)
-      }
-    })
+    var goods = global.dbHelper.getModel('commodity')
+    var name = req.body.goodname,
+      price = req.body.goodprice,
+      imgSrc = req.body.imgSrc
+    if (req.body.goodname && req.body.goodprice) {
+      goods.create({
+        name: name,
+        price: price,
+        imgSrc: imgSrc
+      },function (error,doc) {
+
+      })
+      req.session.error = ''
+      res.send(200)
+    } else {
+      req.session.error = '请正确填写商品!'
+      res.send(404)
+    }
   })
 }

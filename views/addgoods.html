@@ -5,9 +5,18 @@
   <title>addgoods</title>
   <link href="base.css" rel="stylesheet">
   <script src="jquery-3.2.1.js"></script>
+  <style>
+    form {
+      box-sizing: border-box;
+      padding: 20px;
+      background: #ffe18b;
+    }
+  </style>
 </head>
 <body>
+<%- message %>
 <form>
+  <h3>添加商品</h3>
   <label for="gname"></label>
   <input type="text" id="gname" name="gname" placeholder="商品名称"><br>
   <label for="gprice"></label>
@@ -17,20 +26,25 @@
 </body>
 <script>
   function addGood() {
-    var data = $('form').serialize() + '&imgSrc=' + 'xmsz-'
-      + Math.floor(Math.random() * 5 + 1) + '.jpg'
+    var goodname = $('#gname').val(),
+      gprice = $('#gprice').val(),
+      imgSrc = 'xmsz-' + Math.floor(Math.random() * 5 + 1) + '.jpg'
+
+    var data = {'goodname': goodname, goodprice: gprice, 'imgSrc': imgSrc}
 
     $.ajax({
-      url:'/addgoods',//直接写到goods下
-      type:'post',
-      data:data,
-      success:function (data, status) {  //相当于xmlhttp.readyState===4
-        if(status=='success'){//相当于xmlhttp.status==200
-          alert('添加成功！')
+      url: '/addgoods',//直接写到goods下
+      type: 'post',
+      data: data,
+      success: function (data, status) {  //相当于xmlhttp.readyState===4
+        if (status == 'success') {//相当于xmlhttp.status==200
+          alert('goodname:'+goodname+"<br>"+'price:'+gprice)
+          location.href='goods'
         }
       },
-      error:function (data, err) {
+      error: function (data, err) {
         alert('添加失败')
+        location.href='addgoods'
       }
     })
   }
