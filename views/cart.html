@@ -3,10 +3,144 @@
 <head>
   <meta charset="UTF-8">
   <title>cart</title>
-  <link href="base.css">
+
   <script src="jquery-3.2.1.js"></script>
+  <link href="bootstrap.css" rel="stylesheet">
+  <script src="bootstrap.js"></script>
+  <link href="base.css" rel="stylesheet">
+  <style>
+    .content {
+      margin: auto;
+      width: 80%;
+    }
+
+    header {
+      position: relative;
+      margin: auto;
+      text-align: center;
+      height: 80px;
+    }
+
+    .title {
+      position: absolute;
+      display: inline-block;
+      top: 40px;
+      left: 20px;
+      font-size: 28px;
+    }
+
+    .btn {
+      position: absolute;
+      padding: 3px;
+      font-size: 12px;
+      top: 40px;
+    }
+
+    .btn-info {
+      right: 20px;
+    }
+
+    .btn-success {
+      right: 100px;
+    }
+
+    label {
+      display: inline-block;
+    }
+
+    hr {
+      width: 100%;
+    }
+
+    ul, li {
+      padding: 0;
+      margin: 0;
+    }
+    .top {
+      display: flex;
+      height: 60px;
+      line-height: 60px;
+      font-size: 16px;
+      background: #ddd;
+    }
+
+    .item {
+      display: flex;
+      width: 100%;
+      height: 80px;
+      line-height:80px;
+      border-bottom: 1px solid #ddd;
+    }
+    .cc{
+      flex:2;
+    }
+    .name{
+      flex:3;
+    }
+    .price{
+      flex:2;
+    }
+    .amount{
+      flex:3;
+      text-align: center;
+    }
+    .btt {
+      flex:2;
+    }
+
+    #del{
+      line-height:30px;
+      height:40px;
+      color:black;
+    }
+
+  </style>
 </head>
 <body>
-<h3>购物车页面</h3>
+<div class="content">
+  <header>
+    <div class="title">购物车页面</div>
+    <button class="btn btn-success"><a href="goods">商品页</a></button>
+    <button class="btn btn-info"><a href="exit">退出</a></button>
+  </header>
+  <hr>
+  <div class="cart-body">
+    <div class="top">
+      <div class="cc">
+        <input id="checkAll" value="all" type="checkbox"><label for="checkAll">全选</label>
+      </div>
+      <div class="name">
+        商品
+      </div>
+      <div class="price">
+        价格
+      </div>
+      <div class="amount">
+        数量
+      </div>
+      <div class="btt">
+        操作
+      </div>
+    </div>
+    <ul>
+      <li class="item">
+        <div class="cc">
+          <input type="checkbox" id="ii">
+        </div>
+        <div class="name">
+          <img width="40" height="60" src="images/xmsz-1.jpg">
+          乒乓球
+        </div>
+        <div class="price">5234</div>
+        <div class="amount">5</div>
+        <div class="btt">
+          <button id="del" class="btn-primary"><a href="exit">删除</a></button>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
 </body>
 </html>

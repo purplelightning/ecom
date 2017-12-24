@@ -16,7 +16,7 @@
       min-height: 300px;
       border: 2px solid black;
       border-radius: 15px;
-      background: linear-gradient(to bottom right, rgba(222, 22, 22, .9), rgba(22, 22, 222, .7)) no-repeat;
+      background: linear-gradient(to bottom right, rgba(222, 222, 22, .9), rgba(22, 22, 222, .7)) no-repeat;
     }
 
     header {
@@ -85,7 +85,7 @@
         </div>
         <div style="text-align:center">
           <a><%= goods[i].name %></a>
-          <strong style="color:black">￥<%= goods[i].price %></strong>
+          <strong style="color:red">￥<%= goods[i].price %></strong>
         </div>
         <div>
           <a class="btn btn-success" style="width:90px;" href="addcart">加入购物车</a>

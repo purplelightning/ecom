@@ -6,23 +6,44 @@
   <link href="base.css" rel="stylesheet">
   <script src="jquery-3.2.1.js"></script>
   <style>
-    form {
-      box-sizing: border-box;
-      padding: 20px;
-      background: #ffe18b;
+    .content {
+      position: relative;
+      margin:auto;
+
     }
+    .btn{
+      display:block;
+      position: absolute;
+      padding:5px;
+      top:30px;
+      right:20px;
+      background: #1558d3;
+    }
+    form{
+      margin-top:50px;
+      padding:20px;
+      box-sizing: border-box;
+      background: #ffe18b;
+      border:1px solid black;
+    }
+
+
   </style>
 </head>
 <body>
 <%- message %>
-<form>
+<div class="content">
   <h3>添加商品</h3>
-  <label for="gname"></label>
-  <input type="text" id="gname" name="gname" placeholder="商品名称"><br>
-  <label for="gprice"></label>
-  <input type="text" id="gprice" name="gprice" placeholder="商品价格"><br>
-  <button class="btn-small" onclick="addGood()">添加</button>
-</form>
+  <button class="btn"><a href="goods">返回商品页</a></button>
+  <form>
+    <label for="gname"></label>
+    <input type="text" id="gname" name="gname" placeholder="商品名称"><br>
+    <label for="gprice"></label>
+    <input type="text" id="gprice" name="gprice" placeholder="商品价格"><br>
+    <button class="btn-small" onclick="addGood()">添加</button>
+  </form>
+</div>
+
 </body>
 <script>
   function addGood() {
@@ -38,13 +59,13 @@
       data: data,
       success: function (data, status) {  //相当于xmlhttp.readyState===4
         if (status == 'success') {//相当于xmlhttp.status==200
-          alert('goodname:'+goodname+"<br>"+'price:'+gprice)
-          location.href='goods'
+          alert('goodname:' + goodname + "<br>" + 'price:' + gprice)
+          location.href = 'goods'
         }
       },
       error: function (data, err) {
         alert('添加失败')
-        location.href='addgoods'
+        location.href = 'addgoods'
       }
     })
   }
