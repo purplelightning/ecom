@@ -5,6 +5,7 @@ module.exports = function (app) {
   require('./goods')(app)
   require('./login')(app)
   require('./cart')(app)
+  require('./logout')(app)
 }
 
 // var express=require('express')

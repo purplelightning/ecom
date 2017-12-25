@@ -50,7 +50,7 @@ app.use(function (req, res, next) {
 
 //首页重定向到注册
 app.route('/').get(function (req, res) {
-  res.render('register')
+  res.render('login')
 })
 
 // app.route('/book').get(function (req, res) {
