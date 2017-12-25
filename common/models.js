@@ -11,8 +11,8 @@ module.exports = {
     imgSrc: String
   },
   cart: {
-    uId: {type: String},
-    cId: {type: String},
+    uId: {type: String},//用户id
+    cId: {type: String},//商品id
     cName: {type: String},
     cPrice: {type: String},
     cImgSrc: {type: String},
