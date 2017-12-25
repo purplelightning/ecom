@@ -100,15 +100,38 @@
       flex: 2;
     }
 
+    input[type=text] {
+      height: 30px;
+      text-align: center;
+    }
+
+    .bottom {
+      float: right;
+      height: 50px;
+      padding: 5px;
+      line-height: 50px;
+      margin-right: 20px;
+      font-size: 0;
+    }
+
+    .bottom > .text {
+      font-size: 20px;
+      margin-right: 5px;
+    }
+
     .totalprice {
-      font-size: 28px;
+      margin-right: 20px;
+      font-size: 26px;
       color: #d30d14;
     }
 
     .bb {
-      padding: 5px 20px;
+      width: 60px;
+      height: 30px;
+      line-height: 30px;
       background: #31b159;
     }
+
 
   </style>
 </head>
@@ -167,11 +190,11 @@
       <%}%>
     </ul>
 
-    <footer>
-      <span class="text">总计：</span>
+    <div class="bottom">
+      <span class="text">总计:</span>
       <span class="totalprice">￥0.00</span>
       <button class="abtn bb" onclick="clearing()">结算</button>
-    </footer>
+    </div>
 
   </div>
 </div>
@@ -179,39 +202,49 @@
 </body>
 <script>
   var sum = 0
-  //商品数量加减点击操作
-  $('.amount').click(function () {
-    var self = $(this)
-    var type = self.attr('data-type'),
-      num = parseFloat(self.siblings('input').val())
-    if (type == 'add') {
-      num++
-    } else if (type == 'subtr') {
-      if (num > 1) {
-        num--
-      } else {
-        return false
+
+  $(function () {
+    //商品数量加减点击操作
+    $('.amount a').click(function () {
+      var self = $(this)
+      var type = self.attr('data-type'),
+        num = parseFloat(self.siblings('input').val())
+      if (type == 'add') {
+        num++
+      } else if (type == 'subtr') {
+        if (num > 1) {
+          num--
+        } else {
+          return false
+        }
       }
-    }
-    self.siblings('input').val(num)
-    calTotalPrice()
-  })
-
-  //checkbox单选事件  若都选中，改变全选状态，否则全选为false
-  $('input[name="chkItem"]:checked').each(function () {
-    var isCheck = $('input[name="chkItem"]:not(:checked)').length ? false : true
-    $('#checkAll').prop('checked', isCheck) //改变全选状态
-    calTotalPrice()
-  })
-
-  //全选改变单选状态
-  $('#checkAll').click(function () {
-    var isCheck = $(this).is(':checked')
-    $('input[name="chkItem"]').each(function () {
-      $(this).prop('checked', isCheck)
+      self.siblings('input').val(num)
+      calTotalPrice()
     })
-    calTotalPrice()
+
+    //checkbox单选事件  若都选中，改变全选状态，否则全选为false
+    $('input[name="chkItem"]:checked').each(function () {
+      var isCheck = $('input[name="chkItem"]:not(:checked)').length ? false : true
+      $('#checkAll').prop('checked', isCheck) //改变全选状态
+      calTotalPrice()
+    })
+
+    $('input[name="chkItem"]').each(function () {
+      $(this).click(function () {
+        calTotalPrice()
+      })
+    })
+
+    //全选改变单选状态
+    $('#checkAll').click(function () {
+      var isCheck = $(this).is(':checked')
+      $('input[name="chkItem"]').each(function () {
+        $(this).prop('checked', isCheck)
+      })
+      calTotalPrice()
+    })
   })
+
 
   //计算商品总价格  获取index,price
   function calTotalPrice() {
@@ -223,6 +256,8 @@
       var quantity = $('#Q' + index).val()
       sum += parseFloat(price) * parseFloat(quantity)
     })
+    $('.totalprice').html('￥' + sum.toFixed(2))
+//    alert(sum)
   }
 
   //用户结算  ajax传递数据
